@@ -1,24 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import MyComponent from './pages/todo/MyComponent';
+
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  NavLink
+} from 'react-router-dom';
+import StarwarsPage from './pages/starwars';
+
+import './style.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <header>
+          <NavLink to="/todo">ToDo</NavLink>
+          <NavLink to="/about">About Page</NavLink>
+          <NavLink to="/starwars">StarWars</NavLink>
+          <NavLink to="/">Home</NavLink>
+        </header>
+        <Switch>
+          <Route path="/todo">
+            <MyComponent />
+          </Route>
+          <Route path="/about">
+            <h1 className="container">About page</h1>
+          </Route>
+          <Route path="/starwars">
+            <StarwarsPage />
+          </Route>
+          <Route exact path="/">
+            <h1>Home page</h1>
+          </Route>
+          <Route path="*">
+            <h1>404 not found</h1>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
